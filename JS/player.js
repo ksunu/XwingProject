@@ -64,12 +64,12 @@ class Player {
 
     }
     shoot() {
-        this.bullets.push(new Bullets(this.ctx, this.posX, this.posY, this.posX0, this.playerW, this.playerH))
+        this.bullets.push(new Bullets(this.ctx, this.posX, this.posY, this.playerW, this.playerH))
         console.log('traza', 'bullets', this.bullets)
+
     }
     clearBullets() {
         this.bullets = this.bullets.filter(elm => elm.posY >= this.canvasSize.h)
-        console.log('traza', 'filter', this.bullets)
     }
 
     setEventListeners() {
