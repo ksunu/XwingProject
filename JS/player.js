@@ -15,21 +15,70 @@ class Player {
         this.image = new Image()
         this.image.src = './img/pngwave.png'
 
-        this.vel = 10
+        this.vel = 20
+
+
+        this.keys = {
+            LEFT: 37,
+            RIGHT: 39,
+            // UP: 38,
+            // DOWN: 40,
+            SPACE: 32,
+            // ENTER: 13,
+        }
+
+        this.bullets = []
 
     }
 
     draw() {
+        this.setEventListeners()
+
+        this.bullets.forEach(elm => elm.draw())
+
+        this.clearBullets()
+
+
         this.ctx.drawImage(this.image, this.posX, this.posY, this.playerW, this.playerH)
+
         this.move()
+        
     }
 
     move(dir) {
+        switch (dir) {
+            case 'left':
+                if (this.posX <= 30) {
+                    this.posX == 30
+                } else {
+                    this.posX -= this.vel
+                }
+                break;
+            case 'right':
+                if (this.posX + 100 >= this.canvasSize.w - 30) {
+                    this.posX == this.canvasSize.w - 30
+                } else {
+                    this.posX += this.vel
+                }
+        }
 
-        dir === 'left' ? this.posX -= this.vel : null
-        dir === 'right' ? this.posX += this.vel : null
 
-       
+    }
+    shoot() {
+        this.bullets.push(new Bullets(this.ctx, this.posX, this.posY, this.posX0, this.playerW, this.playerH))
+
+    } 
+    clearBullets() {
+        this.bullets = this.bullets.filter(elm => elm.posY -= this.canvasSize.h)
+    }
+
+    setEventListeners() {
+        document.onkeydown = e => {
+            e.keyCode === this.keys.LEFT && this.move('left')
+            e.keyCode === this.keys.RIGHT && this.move('right')
+            e.keyCode === this.keys.SPACE && this.shoot('shoot')
+
+        }
     }
 
 
