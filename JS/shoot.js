@@ -29,5 +29,5 @@ class Bullets {
     move() {
         this.posY += this.vel
     }
-    
+
 }

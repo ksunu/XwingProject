@@ -13,7 +13,7 @@ const Game = {
         h: window.innerHeight
     },
 
-  
+
 
     init() {
         this.canvasDom = document.getElementById("myCanvas")
@@ -34,7 +34,7 @@ const Game = {
         this.interval = setInterval(() => {
             this.clear()
             this.drawAll()
-        }, 100);
+        }, 50);
     },
 
     reset() {
@@ -48,7 +48,7 @@ const Game = {
         this.player.draw()
     },
 
-    
+
 
     clear() {
         this.ctx.clearRect(0, 0, this.width, this.height)

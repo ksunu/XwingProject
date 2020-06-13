@@ -13,7 +13,7 @@ class Background {
         this.posX = 0
         this.posY = 0
 
-        this.velY = 5
+        this.velY = 10
     }
 
     draw() {
@@ -23,10 +23,9 @@ class Background {
     }
 
     move() {
-        if (this.posY <= -this.height) {
+        if (this.posY >= this.height) {
             this.posY = 0
         }
         this.posY += this.velY
-        console.log(this.move)
     }
 };
