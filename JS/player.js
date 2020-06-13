@@ -1,32 +1,27 @@
 //------PLAYER CHA-------
 class Player {
-    constructor(ctx, name, posX, posY, playerW, playerH, vel, keys, canvasSize){
+
+    constructor(ctx, playerW, playerH, imgSource) {
         this.ctx = ctx
-        this.name = name
-        this.posX = posX
-        this.posY = posY
+
         this.playerW = playerW
         this.playerH = playerH
-        
-        this.vel = vel
-        this.keys = keys
-        this.canvasSize = canvasSize
-        this.player = undefined
+
+        this.width = 50
+        this.height = 50
+
+        this.image = new Image()
+        this.image.src = imgSource
+
+        this.posX = 0
+        this.posY = 0
     }
 
-// INIT
-    init() {
-
+    draw() {
+        this.image.onload = () => {
+            this.ctx.drawImage(this.image, this.posX, this.posY, this.width, this.height)
+        }
     }
 
-// DRAW PLAYER
-    drawPlayer() {
 
-    }
-
-// MOVE PLAYER
-    move() {
-
-    }
 }
-

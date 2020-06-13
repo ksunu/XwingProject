@@ -25,6 +25,7 @@ const Game = {
         this.canvasDom = document.getElementById("myCanvas")
         this.ctx = this.canvasDom.getContext('2d')
         this.setDimentions()
+
         this.start()
     },
 
@@ -43,12 +44,15 @@ const Game = {
     },
 
     reset() {
-        // <<SW changed background>>
         this.background = new Background(this.ctx, this.canvasSize.w, this.canvasSize.h, "./img/Death_Star/justin-wasilenko-death-star-game-mat-92cmx184cm.jpg")
+        this.player = new Player(this.ctx, this.width, this.height, "./img/pngwave.png")
+
     },
+
 
     drawAll() {
         this.background.draw()
+        this.player.draw()
     },
 
     // setEventListeners() {
@@ -62,5 +66,4 @@ const Game = {
     //     // }
     // }
 
-}
-// console.log(Game.init())
+};
