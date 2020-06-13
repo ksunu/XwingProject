@@ -1,7 +1,7 @@
 //------BACKGROUND-----
 
 class Background {
-    constructor(ctx, w, h, imgSource){
+    constructor(ctx, w, h, imgSource) {
         this.ctx = ctx
         this.width = w
         this.height = h
@@ -13,8 +13,10 @@ class Background {
     }
 
     draw() {
-        this.image.onload = () =>  {this.ctx.drawImage(this.image, this.posX, this.posY, this.width, this.height)}      
+        this.image.onload = () => {
+            this.ctx.drawImage(this.image, this.posX, this.posY, this.width, this.height)
+        }
         // this.ctx.drawImage(this.image, this.posX, this.posY + this.height, this.width, this.height);
-        
+
     }
 }

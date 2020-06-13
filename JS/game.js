@@ -37,13 +37,14 @@ const Game = {
         this.canvasDom.setAttribute('height', this.canvasSize.h)
     },
 
-    start(){
+    start() {
         this.reset()
         this.drawAll()
     },
 
-    reset(){
-        this.background = new Background(this.ctx, this.canvasSize.w, this.canvasSize.h, "./img/deathStarBackground.jpg")
+    reset() {
+        // <<SW changed background>>
+        this.background = new Background(this.ctx, this.canvasSize.w, this.canvasSize.h, "./img/Death_Star/justin-wasilenko-death-star-game-mat-92cmx184cm.jpg")
     },
 
     drawAll() {
