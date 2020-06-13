@@ -1,26 +1,35 @@
 //------PLAYER CHA-------
 class Player {
 
-    constructor(ctx, playerW, playerH, imgSource) {
+    constructor(ctx, canvasSize) {
+
         this.ctx = ctx
+        this.canvasSize = canvasSize
 
-        this.playerW = playerW
-        this.playerH = playerH
+        this.posX = this.canvasSize.w / 2 - 50
+        this.posY = this.canvasSize.h - 150
 
-        this.width = 50
-        this.height = 50
+        this.playerW = 100
+        this.playerH = 100
 
         this.image = new Image()
-        this.image.src = imgSource
+        this.image.src = './img/pngwave.png'
 
-        this.posX = 0
-        this.posY = 0
+        this.vel = 10
+
     }
 
     draw() {
-        this.image.onload = () => {
-            this.ctx.drawImage(this.image, this.posX, this.posY, this.width, this.height)
-        }
+        this.ctx.drawImage(this.image, this.posX, this.posY, this.playerW, this.playerH)
+        this.move()
+    }
+
+    move(dir) {
+
+        dir === 'left' ? this.posX -= this.vel : null
+        dir === 'right' ? this.posX += this.vel : null
+
+       
     }
 
 
