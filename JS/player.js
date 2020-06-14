@@ -39,7 +39,7 @@ class Player {
         this.move();
     }
 
-    move(dir) {
+    move(dir) { // el uso de una tecla anula a las otras
         switch (dir) {
             case "left":
                 if (this.posX <= 30) {

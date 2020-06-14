@@ -19,10 +19,13 @@ class TieFighter {
         this.image.src = './img/tie fighter/Tie Fighter.B09.shadowless.2k (1).png'
 
     }
+
+    // INTENTAR QUE NO SE SOLAPEN CUANDO SE HACEN SPAWN
     draw() {
         this.ctx.drawImage(this.image, this.posX, this.posY, this.fighterW, this.fighterH)
         this.move()
     }
+
     move() {
         this.posY += this.vel
     }

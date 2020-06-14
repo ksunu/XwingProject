@@ -43,6 +43,7 @@ const Game = {
 
             this.framesCounter > 6000 ? this.framesCounter = 0 : this.framesCounter++
             this.isCollision()
+            this.isHit()
         }, 50);
     },
 
@@ -50,7 +51,6 @@ const Game = {
         this.background = new Background(this.ctx, this.canvasSize.w, this.canvasSize.h)
         this.player = new Player(this.ctx, this.canvasSize)
         this.tieFighter = []
-        // this.tieFighter = new TieFighter(this.ctx, this.canvasSize.w, this.canvasSize.h)
 
     },
 
@@ -77,16 +77,44 @@ const Game = {
     },
 
     isCollision() {
-       this.tieFighter.some(elm => {
-           if (
-               (this.player.posX < elm.posX + elm.fighterW - 50) && //por la derecha
-           (this.player.posX + this.player.playerW > elm.posX + 50) && //por la izquierda
-           (this.player.posY < elm.posY + elm.fighterH) && // por abajo
-           (this.player.posX + this.player.playerH > elm.posY + 50)) {// por arriba
-               console.log("Collision")
-           } 
-       })
+        this.tieFighter.some(elm => {
+            if (
+                (this.player.posX < elm.posX + elm.fighterW - 50) && //por la derecha
+                (this.player.posX + this.player.playerW > elm.posX + 50) && //por la izquierda
+                (this.player.posY < elm.posY + elm.fighterH) && // por abajo
+                (this.player.posY + this.player.playerH > elm.posY + 50)) // por arriba
+            {
+                console.log('traza', "Collision")
+            }
+        })
     },
 
-   
+    isHit() {
+        this.tieFighter.some(tie => {
+            this.player.bullets.forEach(elm => {
+                if (
+                    (elm.posX < tie.posX + tie.fighterW) &&
+                    (elm.posX + elm.width > tie.posX) &&
+                    (elm.posY < tie.posY + tie.fighterH) &&
+                    (elm.height + elm.posY > tie.posY)) {
+                    console.log('traza', 'boom')
+                    tie.life--
+                    this.destroyTie()
+                    elm.posY = this.canvasSize - 1
+                }
+            })
+        })
+    },
+
+    destroyTie() { //destruye a todos con un disparo, arreglar.
+        this.tieFighter.forEach(tie => {
+            console.log(tie.life)
+            if (tie.life >= 0) {
+                tie.posY = this.canvasSize.h - 1
+                console.log('   traza', 'life', tie.life)
+            }
+        })
+    },
+
+
 };
