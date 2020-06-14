@@ -8,7 +8,7 @@ class Background {
         this.height = h
 
         this.image = new Image()
-        this.image.src = "./img/Death_Star/justin-wasilenko-death-star-game-mat-92cmx184cm.jpg"
+        this.image.src = "./img/Death_Star/justin-wasilenko-deathstartrench-top.jpg"
 
         this.posX = 0
         this.posY = 0

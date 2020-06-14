@@ -1,4 +1,4 @@
-let fuCkingBullet = 1
+let fuckingBullet = 1
 class Bullets {
     constructor(ctx, playerPosX, playerPosY, playerWidth, playerHeight) {
         this.ctx = ctx
@@ -20,7 +20,7 @@ class Bullets {
         this.image = new Image()
         this.image.src = "./img/bullet/laser-sprite-png-6-transparent.png"
 
-        this.fuCkingBullet = fuCkingBullet++
+        this.fuCkingBullet = fuckingBullet++
 
     }
 
