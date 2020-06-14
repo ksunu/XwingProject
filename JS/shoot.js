@@ -25,9 +25,8 @@ class Bullets {
     }
 
     draw() {
-        this.ctx.drawImage(this.image, this.posX + 50, this.posY, this.width, this.height)
-        this.ctx.drawImage(this.image, this.posX - 50, this.posY, this.width, this.height)
-        console.log('traza', 'bala', this)
+        this.ctx.drawImage(this.image, this.posX + 40, this.posY, this.width, this.height)
+        this.ctx.drawImage(this.image, this.posX - 40, this.posY, this.width, this.height)
         this.move()
     }
 

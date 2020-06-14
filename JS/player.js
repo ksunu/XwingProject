@@ -36,7 +36,7 @@ class Player {
 
         this.bullets.forEach(elm => elm.draw())
 
-        //  this.clearBullets()
+        this.clearBullets()
 
         this.ctx.drawImage(this.image, this.posX, this.posY, this.playerW, this.playerH)
 
@@ -82,7 +82,7 @@ class Player {
 
     }
     clearBullets() {
-        this.bullets = this.bullets.filter(elm => elm.posY >= this.canvasSize.h)
+        this.bullets = this.bullets.filter(elm => elm.posY <= this.gameH)
     }
 
     setEventListeners() {
