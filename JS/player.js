@@ -21,8 +21,8 @@ class Player {
         this.keys = {
             LEFT: 37,
             RIGHT: 39,
-            // UP: 38,
-            // DOWN: 40,
+            UP: 38,
+            DOWN: 40,
             SPACE: 32,
             // ENTER: 13,
         }
@@ -36,7 +36,7 @@ class Player {
 
         this.bullets.forEach(elm => elm.draw())
 
-        // this.clearBullets()
+        //  this.clearBullets()
 
         this.ctx.drawImage(this.image, this.posX, this.posY, this.playerW, this.playerH)
 
@@ -59,13 +59,26 @@ class Player {
                 } else {
                     this.posX += this.vel
                 }
+                break;
+            case 'up':
+                if (this.posY <= 30) {
+                    this.posY == 30
+                } else {
+                    this.posY -= this.vel
+                }
+                break;
+            case 'down':
+                if (this.posY + 100 >= this.canvasSize.h - 30) {
+                    this.posY == this.canvasSize.h - 30
+                } else {
+                    this.posY += this.vel
+                }
         }
 
 
     }
     shoot() {
         this.bullets.push(new Bullets(this.ctx, this.posX, this.posY, this.playerW, this.playerH))
-        console.log('traza', 'bullets', this.bullets)
 
     }
     clearBullets() {
@@ -76,6 +89,8 @@ class Player {
         document.onkeydown = e => {
             e.keyCode === this.keys.LEFT && this.move('left')
             e.keyCode === this.keys.RIGHT && this.move('right')
+            e.keyCode === this.keys.UP && this.move('up')
+            e.keyCode === this.keys.DOWN && this.move('down')
             e.keyCode === this.keys.SPACE && this.shoot('shoot')
 
         }
