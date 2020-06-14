@@ -1,5 +1,5 @@
 let fuckingBullet = 1
-class Bullets {
+class Bullets {//intervalos de disparo. 
     constructor(ctx, playerPosX, playerPosY, playerWidth, playerHeight) {
         this.ctx = ctx
 

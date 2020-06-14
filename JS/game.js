@@ -44,7 +44,7 @@ const Game = {
             this.framesCounter > 6000 ? this.framesCounter = 0 : this.framesCounter++
             this.isCollision()
             this.isHit()
-        }, 50);
+        }, 40);
     },
 
     reset() {

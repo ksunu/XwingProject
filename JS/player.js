@@ -14,6 +14,8 @@ class Player {
         this.image.src = "./img/pngwave.png";
 
         this.vel = 20;
+        this.speedX = 0
+        this.speedY = 0
 
         this.keys = {
             LEFT: 37,
@@ -37,6 +39,11 @@ class Player {
         this.ctx.drawImage(this.image, this.posX, this.posY, this.playerW, this.playerH);
 
         this.move();
+    }
+
+    smoothMovement() {
+        this.posX += this.speedX
+        this.posY += this.speedY
     }
 
     move(dir) { // el uso de una tecla anula a las otras
@@ -70,15 +77,18 @@ class Player {
                 }
         }
     }
+
     shoot() {
         this.bullets.push(new Bullets(this.ctx, this.posX, this.posY, this.playerW, this.playerH))
     }
+
     clearBullets() {
         this.bullets = this.bullets.filter(elm => elm.posY >= -1)
     }
 
     setEventListeners() {
         document.onkeydown = (e) => {
+            event.preventDefault() // evita mover la pantalla al apretar la tecla *
             e.keyCode === this.keys.LEFT && this.move("left");
             e.keyCode === this.keys.RIGHT && this.move("right");
             e.keyCode === this.keys.UP && this.move("up");
