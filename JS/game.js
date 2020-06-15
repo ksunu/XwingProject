@@ -144,7 +144,7 @@ const Game = {
     endGame() {
         if (this.timer.time === 0) {
             clearInterval(this.interval)
-         
+
         }
     },
     gameOver() {
