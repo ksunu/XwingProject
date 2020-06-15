@@ -28,4 +28,4 @@ class Background {
         }
         this.posY += this.velY
     }
-};
+}

@@ -6,7 +6,7 @@ class TieFighter {
         this.ctx = ctx
         this.canvasSize = canvasSize
 
-        this.posX = Math.random() * ((innerWidth) - 100)
+        this.posX = Math.random() * (canvasSize - 100)
         this.posY = -100
 
         this.fighterW = 100;

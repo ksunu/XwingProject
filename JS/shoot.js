@@ -1,5 +1,4 @@
-let fuckingBullet = 1
-class Bullets {//intervalos de disparo. 
+class Bullets { //intervalos de disparo. 
     constructor(ctx, playerPosX, playerPosY, playerWidth, playerHeight) {
         this.ctx = ctx
 
@@ -19,8 +18,6 @@ class Bullets {//intervalos de disparo.
 
         this.image = new Image()
         this.image.src = "./img/bullet/laser-sprite-png-6-transparent.png"
-
-        this.fuCkingBullet = fuckingBullet++
 
     }
 

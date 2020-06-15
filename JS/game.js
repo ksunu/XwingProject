@@ -9,6 +9,7 @@ const Game = {
     background: undefined,
     player: undefined,
     tieFighter: [],
+    timer: 0,
     canvasSize: {
         w: window.innerWidth,
         h: window.innerHeight
@@ -41,15 +42,17 @@ const Game = {
             this.generateEnemy()
             this.clearEnemy()
 
-            this.framesCounter > 6000 ? this.framesCounter = 0 : this.framesCounter++
+            this.framesCounter > 5000 ? this.framesCounter = 0 : this.framesCounter++
             this.isCollision()
             this.isHit()
+
         }, 40);
     },
 
     reset() {
         this.background = new Background(this.ctx, this.canvasSize.w, this.canvasSize.h)
         this.player = new Player(this.ctx, this.canvasSize)
+        this.timer = new Timer(this.ctx, this.canvasSize)
         this.tieFighter = []
 
     },
@@ -57,7 +60,9 @@ const Game = {
     drawAll() {
         this.background.draw()
         this.player.draw()
+
         this.tieFighter.forEach(elm => elm.draw())
+        this.timer.draw()
     },
 
 
@@ -106,15 +111,16 @@ const Game = {
         })
     },
 
-    destroyTie() { //destruye a todos con un disparo, arreglar.
+    destroyTie() {
         this.tieFighter.forEach(tie => {
-            console.log(tie.life)
-            if (tie.life >= 0) {
+            console.log('traza', 'tile.life', tie.life)
+            if (tie.life === 0) {
                 tie.posY = this.canvasSize.h - 1
                 console.log('   traza', 'life', tie.life)
             }
         })
     },
+
 
 
 };

@@ -1,8 +1,8 @@
-//------PLAYER CHA-------
+// ------PLAYER CHA-------
 class Player {
     constructor(ctx, canvasSize) {
         this.ctx = ctx;
-        this.canvasSize = canvasSize;
+        this.canvasSize = canvasSize
 
         this.posX = this.canvasSize.w / 2 - 50;
         this.posY = this.canvasSize.h - 150;
@@ -14,8 +14,6 @@ class Player {
         this.image.src = "./img/pngwave.png";
 
         this.vel = 20;
-        this.speedX = 0
-        this.speedY = 0
 
         this.keys = {
             LEFT: 37,
@@ -49,30 +47,22 @@ class Player {
     move(dir) { // el uso de una tecla anula a las otras
         switch (dir) {
             case "left":
-                if (this.posX <= 30) {
-                    this.posX == 30;
-                } else {
+                if (this.posX >= 30) {
                     this.posX -= this.vel;
                 }
                 break;
             case "right":
-                if (this.posX + 100 >= this.canvasSize.w - 30) {
-                    this.posX == this.canvasSize.w - 30;
-                } else {
+                if (this.posX + 100 <= this.canvasSize.w - 30) {
                     this.posX += this.vel;
                 }
                 break;
             case "up":
-                if (this.posY <= 30) {
-                    this.posY == 30;
-                } else {
+                if (this.posY >= 30) {
                     this.posY -= this.vel;
                 }
                 break;
             case "down":
-                if (this.posY + 100 >= this.canvasSize.h - 30) {
-                    this.posY == this.canvasSize.h - 30;
-                } else {
+                if (this.posY + 100 <= this.canvasSize.h - 30) {
                     this.posY += this.vel;
                 }
         }
@@ -88,7 +78,7 @@ class Player {
 
     setEventListeners() {
         document.onkeydown = (e) => {
-            event.preventDefault() // evita mover la pantalla al apretar la tecla *
+            e.preventDefault() // <=== evita mover la pantalla al apretar las teclas
             e.keyCode === this.keys.LEFT && this.move("left");
             e.keyCode === this.keys.RIGHT && this.move("right");
             e.keyCode === this.keys.UP && this.move("up");
