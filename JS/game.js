@@ -9,7 +9,7 @@ const Game = {
     background: undefined,
     player: undefined,
     tieFighter: [],
-    timer: 0,
+    score: 0,
     canvasSize: {
         w: window.innerWidth,
         h: window.innerHeight
@@ -45,6 +45,8 @@ const Game = {
             this.framesCounter > 5000 ? this.framesCounter = 0 : this.framesCounter++
             this.isCollision()
             this.isHit()
+            this.gameOver()
+            this.endGame()
 
         }, 40);
     },
@@ -53,6 +55,7 @@ const Game = {
         this.background = new Background(this.ctx, this.canvasSize.w, this.canvasSize.h)
         this.player = new Player(this.ctx, this.canvasSize)
         this.timer = new Timer(this.ctx, this.canvasSize)
+        this.score = new Score(this.ctx, this.canvasSize)
         this.tieFighter = []
 
     },
@@ -63,6 +66,10 @@ const Game = {
 
         this.tieFighter.forEach(elm => elm.draw())
         this.timer.draw()
+        this.score.draw()
+
+
+
     },
 
 
@@ -74,22 +81,30 @@ const Game = {
     generateEnemy() {
         if (this.framesCounter % Math.floor(50 + (Math.random() * 10)) === 0) {
             this.tieFighter.push(new TieFighter(this.ctx, this.canvasSize.w, this.canvasSize.h))
+            // let tieEngine = new Audio('/sounds/fire/TIE fighter flyby 1.mp3');
+            // tieEngine.play()
+            // tieEngine.volume = 0.1
+            // tieEngine.duration = 1
         }
     },
 
     clearEnemy() {
         this.tieFighter = this.tieFighter.filter(elm => elm.posY <= this.canvasSize.h)
+
     },
 
     isCollision() {
         this.tieFighter.some(elm => {
             if (
-                (this.player.posX < elm.posX + elm.fighterW - 50) && //por la derecha
-                (this.player.posX + this.player.playerW > elm.posX + 50) && //por la izquierda
-                (this.player.posY < elm.posY + elm.fighterH) && // por abajo
-                (this.player.posY + this.player.playerH > elm.posY + 50)) // por arriba
+                (this.player.posX < elm.posX + elm.fighterW - 20) && //por la derecha
+                (this.player.posX + this.player.playerW > elm.posX + 20) && //por la izquierda
+                (this.player.posY < elm.posY + elm.fighterH - 30) && // por abajo
+                (this.player.posY + this.player.playerH > elm.posY + 30)) // por arriba
             {
+                elm.posY = this.canvasSize - 1
+                this.player.life -= 1
                 console.log('traza', "Collision")
+                console.log(this.player.life)
             }
         })
     },
@@ -106,6 +121,7 @@ const Game = {
                     tie.life--
                     this.destroyTie()
                     elm.posY = this.canvasSize - 1
+
                 }
             })
         })
@@ -116,11 +132,30 @@ const Game = {
             console.log('traza', 'tile.life', tie.life)
             if (tie.life === 0) {
                 tie.posY = this.canvasSize.h - 1
+                this.score.score0 += 10
                 console.log('   traza', 'life', tie.life)
+                let tieExplosion = new Audio('/sounds/explode/TIE fighter explode.mp3');
+                tieExplosion.play()
+                tieExplosion.volume = 0.2
+                tieExplosion.duration = 1
             }
         })
     },
-
+    endGame() {
+        if (this.timer.time === 0) {
+            clearInterval(this.interval)
+         
+        }
+    },
+    gameOver() {
+        if (this.player.life === 0) {
+            clearInterval(this.interval)
+            let xWingExplosion = new Audio('/sounds/explode/XWing explode.mp3')
+            xWingExplosion.play()
+            xWingExplosion.volume = 0.5
+            xWingExplosion.duration = 1
+        }
+    }
 
 
 };

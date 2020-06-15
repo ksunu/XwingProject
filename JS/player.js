@@ -14,6 +14,7 @@ class Player {
         this.image.src = "./img/pngwave.png";
 
         this.vel = 20;
+        this.life = 3
 
         this.keys = {
             LEFT: 37,
@@ -65,10 +66,18 @@ class Player {
                 if (this.posY + 100 <= this.canvasSize.h - 30) {
                     this.posY += this.vel;
                 }
+                break;
+            case "shoot":
+                if ("shoot" === true) {
+
+                }
         }
     }
 
     shoot() {
+        let playerShoot = new Audio('./sounds/fire/XWing fire.mp3');
+        playerShoot.play()
+        playerShoot.volume = 0.3
         this.bullets.push(new Bullets(this.ctx, this.posX, this.posY, this.playerW, this.playerH))
     }
 
@@ -86,4 +95,5 @@ class Player {
             e.keyCode === this.keys.SPACE && this.shoot("shoot");
         };
     }
+
 }

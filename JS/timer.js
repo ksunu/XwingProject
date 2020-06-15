@@ -10,7 +10,7 @@ class Timer {
 
         this.setTimer()
     }
-    draw(ctx, num) {
+    draw() {
 
         this.ctx.beginPath()
         this.ctx.fillStyle = "white"
@@ -20,7 +20,7 @@ class Timer {
 
     }
     setTimer() {
-        this.time = 120;
+        this.time = 90;
         const seconds = setInterval(() => {
             this.time--;
             if (this.time <= 0) {
