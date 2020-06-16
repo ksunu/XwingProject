@@ -5,8 +5,8 @@ class Timer {
         this.ctx = ctx
         this.canvasSize = canvasSize
 
-        this.posX = 30
-        this.posY = canvasSize.h - 50
+        this.posX = canvasSize.w -280
+        this.posY = 40
 
         this.setTimer()
     }
@@ -25,7 +25,6 @@ class Timer {
             this.time--;
             if (this.time <= 0) {
                 clearInterval(seconds);
-                console.log("Time complete");
             }
         }, 1000)
 

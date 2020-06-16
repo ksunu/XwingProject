@@ -11,7 +11,7 @@ class TieFighter {
 
         this.fighterW = 100
         this.fighterH = 100
-        
+
         this.points = 10
 
         this.life = 1
@@ -19,18 +19,42 @@ class TieFighter {
 
         this.image = new Image()
         this.image.src = './img/tie fighter/Tie Fighter.B09.shadowless.2k (1).png'
+        this.enemyBull = []
+        this.shoot()
 
+
+    
     }
 
     // INTENTAR QUE NO SE SOLAPEN CUANDO SE HACEN SPAWN
     draw() {
         this.ctx.drawImage(this.image, this.posX, this.posY, this.fighterW, this.fighterH)
         this.move()
+        this.enemyBull.forEach((elm) => elm.draw());
+        this.clearBullets();
     }
 
     move() {
         this.posY += this.vel
+     
+        
     }
+
+    shoot() {
+        // let playerShoot = new Audio('');
+        // playerShoot.play()
+        // playerShoot.volume = 0.1
+        this.enemyBull.push(new EnemyBullets(this.ctx, this.posX, this.posY, this.fighterW, this.fighterH))
+        
+
+        
+        
+    }
+    clearBullets() {
+        this.enemyBull = this.enemyBull.filter(elm => elm.posY >= -1)
+    }
+ 
+
 }
 
 class TieStriker extends TieFighter {
@@ -38,7 +62,7 @@ class TieStriker extends TieFighter {
         super(ctx, canvasSize)
 
         this.points = 30
- 
+
         this.life = 3
         this.vel = 2
 

@@ -4,7 +4,7 @@ class Score {
         this.canvasSize = canvasSize
 
         this.posX = 30
-        this.posY = canvasSize.h - 100
+        this.posY = 40
 
         this.score0 = 0
     }

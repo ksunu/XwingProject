@@ -26,6 +26,7 @@ class Player {
         };
 
         this.bullets = [];
+
     }
 
     draw() {

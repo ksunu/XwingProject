@@ -17,8 +17,7 @@ const Game = {
     FPS: 60,
     framesCounter: 0,
 
-
-
+    // ---GAME INIT---
     init() {
         this.canvasDom = document.getElementById("myCanvas")
         this.ctx = this.canvasDom.getContext('2d')
@@ -26,6 +25,7 @@ const Game = {
         this.start()
     },
 
+    // ---GAME DIMS---
     setDimentions() {
         this.canvasSize.w = window.innerWidth
         this.canvasSize.h = window.innerHeight
@@ -33,94 +33,103 @@ const Game = {
         this.canvasDom.setAttribute('height', this.canvasSize.h)
     },
 
+    // ---GAME Start---
     start() {
+        //    let backgrounBattle = new Audio('/sounds/background/10 The Battle Of Yavin.mp3');
+        //    backgrounBattle.play()
+        //    backgrounBattle.volume = 0.1
         this.reset()
         this.interval = setInterval(() => {
             this.clear()
-            this.drawAll()
+            this.drawAll(this.framesCounter)
 
             this.generateEnemy()
+
             this.clearEnemy()
 
             this.framesCounter > 5000 ? this.framesCounter = 0 : this.framesCounter++
             this.isCollision()
             this.isHit()
+
             // this.gameOver()
             this.endGame()
-
         }, 29);
     },
 
+    // ---GAME RESET---
     reset() {
         this.background = new Background(this.ctx, this.canvasSize.w, this.canvasSize.h)
         this.player = new Player(this.ctx, this.canvasSize)
         this.timer = new Timer(this.ctx, this.canvasSize)
         this.score = new Score(this.ctx, this.canvasSize)
         this.tieFighter = []
-
-
+        this.helmet = new Helmet(this.ctx, this.canvasSize)
     },
 
-    drawAll() {
+    // ---GAME DRAW ALL---
+    drawAll(frames) {
         this.background.draw()
         this.player.draw()
 
         this.tieFighter.forEach(elm => elm.draw())
 
+        this.helmet.draw(frames)
 
         this.timer.draw()
+
         this.score.draw()
-
-
-
     },
 
-
-
+    // ---GAME CLEAR---
     clear() {
         this.ctx.clearRect(0, 0, this.width, this.height)
     },
 
+    // ---GAME GENERATE ENEMY---
     generateEnemy() {
         if (this.framesCounter % Math.floor(150 + (Math.random() * 10)) === 0) {
             this.tieFighter.push(new TieFighter(this.ctx, this.canvasSize.w, this.canvasSize.h))
             this.tieFighter.push(new TieStriker(this.ctx, this.canvasSize.w, this.canvasSize.h))
-
-
             // let tieEngine = new Audio('/sounds/fire/TIE fighter flyby 1.mp3');
             // tieEngine.play()
             // tieEngine.volume = 0.1
             // tieEngine.duration = 1
         }
-
-
-
     },
 
+    // ---GAME CLEAR ENEMY---
     clearEnemy() {
         this.tieFighter = this.tieFighter.filter(elm => elm.posY <= this.canvasSize.h)
 
 
     },
 
+    // ---GAME ENEMY SHOOT---
+    enemyShoot() {
+        if (this.framesCounter % Math.floor(400 + (Math.random() * 10)) === 0) {
+            this.tieFighter.shoot()
+        }
+    },
+
+    // ---GAME IS COLLISION---
     isCollision() {
         this.tieFighter.some(elm => {
             if (
                 (this.player.posX < elm.posX + elm.fighterW - 20) && //por la derecha
                 (this.player.posX + this.player.playerW > elm.posX + 20) && //por la izquierda
                 (this.player.posY < elm.posY + elm.fighterH - 30) && // por abajo
-                (this.player.posY + this.player.playerH > elm.posY + 30)) // por arriba
-            {
+                (this.player.posY + this.player.playerH > elm.posY + 30) // por arriba
+            ) {
                 elm.posY = this.canvasSize - 1
                 this.player.life -= 1
-                console.log('traza', "Collision")
-                console.log(this.player.life)
             }
         })
 
     },
 
+    // ---GAME IS HIT---
     isHit() {
+        // ajustar width izq del enemigo
         this.tieFighter.some(tie => {
             this.player.bullets.forEach(elm => {
                 if (
@@ -128,7 +137,6 @@ const Game = {
                     (elm.posX + elm.width > tie.posX) &&
                     (elm.posY < tie.posY + tie.fighterH) &&
                     (elm.height + elm.posY > tie.posY)) {
-                    console.log('traza', 'boom')
                     tie.life--
                     this.destroyTie()
                     elm.posY = this.canvasSize - 1
@@ -136,16 +144,14 @@ const Game = {
                 }
             })
         })
-
     },
 
+    // ---GAME DESTROY TIE---
     destroyTie() {
         this.tieFighter.forEach(tie => {
-            console.log('traza', 'tile.life', tie.life)
             if (tie.life === 0) {
                 tie.posY = this.canvasSize.h - 1
                 this.score.score0 += tie.points
-                console.log('   traza', 'life', tie.life)
                 let tieExplosion = new Audio('/sounds/explode/TIE fighter explode.mp3');
                 tieExplosion.play()
                 tieExplosion.volume = 0.05
@@ -155,6 +161,7 @@ const Game = {
 
     },
 
+    // --- GAME END---
     endGame() {
         setTimeout((() => {
             if (this.timer.time === 0) {
