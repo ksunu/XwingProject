@@ -38,6 +38,8 @@ class Player {
         this.ctx.drawImage(this.image, this.posX, this.posY, this.playerW, this.playerH);
 
         this.move();
+
+        this.isDestroyed()
     }
 
     smoothMovement() {
@@ -77,7 +79,7 @@ class Player {
     shoot() {
         let playerShoot = new Audio('./sounds/fire/XWing fire.mp3');
         playerShoot.play()
-        playerShoot.volume = 0.3
+        playerShoot.volume = 0.1
         this.bullets.push(new Bullets(this.ctx, this.posX, this.posY, this.playerW, this.playerH))
     }
 
@@ -94,6 +96,14 @@ class Player {
             e.keyCode === this.keys.DOWN && this.move("down");
             e.keyCode === this.keys.SPACE && this.shoot("shoot");
         };
+    }
+
+    isDestroyed() {
+        if (this.life === 0) {
+            let xWingExplosion = new Audio('/sounds/explode/XWing explode.mp3')
+            xWingExplosion.play()
+            xWingExplosion.volume = 0.3
+        }
     }
 
 }

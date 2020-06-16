@@ -32,3 +32,28 @@ class Bullets { //intervalos de disparo.
     }
 
 }
+class EnemyBullets extends Bullets {
+    constructor(ctx) {
+        super()
+        this.ctx = ctx
+
+        this.width = 20
+        this.height = 30
+
+        this.vel = 6
+
+        this.image = new Image()
+        this.image.src = "./img/bullet/blue-laser-png-transparent.png"
+
+    }
+
+    draw() {
+        this.ctx.drawImage(this.image, this.posX, this.posY, this.width, this.height)
+        this.move()
+    }
+
+    move() {
+        this.posY += this.vel
+    }
+
+}

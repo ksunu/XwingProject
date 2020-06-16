@@ -45,10 +45,10 @@ const Game = {
             this.framesCounter > 5000 ? this.framesCounter = 0 : this.framesCounter++
             this.isCollision()
             this.isHit()
-            this.gameOver()
+            // this.gameOver()
             this.endGame()
 
-        }, 40);
+        }, 29);
     },
 
     reset() {
@@ -58,6 +58,7 @@ const Game = {
         this.score = new Score(this.ctx, this.canvasSize)
         this.tieFighter = []
 
+
     },
 
     drawAll() {
@@ -65,6 +66,8 @@ const Game = {
         this.player.draw()
 
         this.tieFighter.forEach(elm => elm.draw())
+
+
         this.timer.draw()
         this.score.draw()
 
@@ -79,17 +82,24 @@ const Game = {
     },
 
     generateEnemy() {
-        if (this.framesCounter % Math.floor(50 + (Math.random() * 10)) === 0) {
+        if (this.framesCounter % Math.floor(150 + (Math.random() * 10)) === 0) {
             this.tieFighter.push(new TieFighter(this.ctx, this.canvasSize.w, this.canvasSize.h))
+            this.tieFighter.push(new TieStriker(this.ctx, this.canvasSize.w, this.canvasSize.h))
+
+
             // let tieEngine = new Audio('/sounds/fire/TIE fighter flyby 1.mp3');
             // tieEngine.play()
             // tieEngine.volume = 0.1
             // tieEngine.duration = 1
         }
+
+
+
     },
 
     clearEnemy() {
         this.tieFighter = this.tieFighter.filter(elm => elm.posY <= this.canvasSize.h)
+
 
     },
 
@@ -107,13 +117,14 @@ const Game = {
                 console.log(this.player.life)
             }
         })
+
     },
 
     isHit() {
         this.tieFighter.some(tie => {
             this.player.bullets.forEach(elm => {
                 if (
-                    (elm.posX < tie.posX + tie.fighterW) &&
+                    (elm.posX < tie.posX + tie.fighterW + 10) &&
                     (elm.posX + elm.width > tie.posX) &&
                     (elm.posY < tie.posY + tie.fighterH) &&
                     (elm.height + elm.posY > tie.posY)) {
@@ -125,6 +136,7 @@ const Game = {
                 }
             })
         })
+
     },
 
     destroyTie() {
@@ -132,30 +144,38 @@ const Game = {
             console.log('traza', 'tile.life', tie.life)
             if (tie.life === 0) {
                 tie.posY = this.canvasSize.h - 1
-                this.score.score0 += 10
+                this.score.score0 += tie.points
                 console.log('   traza', 'life', tie.life)
                 let tieExplosion = new Audio('/sounds/explode/TIE fighter explode.mp3');
                 tieExplosion.play()
-                tieExplosion.volume = 0.2
+                tieExplosion.volume = 0.05
                 tieExplosion.duration = 1
             }
         })
-    },
-    endGame() {
-        if (this.timer.time === 0) {
-            clearInterval(this.interval)
 
-        }
     },
-    gameOver() {
-        if (this.player.life === 0) {
-            clearInterval(this.interval)
-            let xWingExplosion = new Audio('/sounds/explode/XWing explode.mp3')
-            xWingExplosion.play()
-            xWingExplosion.volume = 0.5
-            xWingExplosion.duration = 1
-        }
-    }
+
+    endGame() {
+        setTimeout((() => {
+            if (this.timer.time === 0) {
+                clearInterval(this.interval)
+            } else if (this.player.life === 0) {
+                clearInterval(this.interval)
+
+            }
+        }), 2000)
+        this.player.isDestroyed()
+    },
+
+    // gameOver() {
+    //     if (this.player.life === 0) {
+    //         clearInterval(this.interval)
+    //         let xWingExplosion = new Audio('/sounds/explode/XWing explode.mp3')
+    //         xWingExplosion.play()
+    //         xWingExplosion.volume = 0.3
+    //         xWingExplosion.duration = 1
+    //     }
+    // }
 
 
 };
