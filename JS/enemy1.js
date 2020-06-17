@@ -23,37 +23,30 @@ class TieFighter {
         this.shoot()
 
 
-
     }
 
     // INTENTAR QUE NO SE SOLAPEN CUANDO SE HACEN SPAWN
     draw() {
         this.ctx.drawImage(this.image, this.posX, this.posY, this.fighterW, this.fighterH)
         this.move()
-        this.enemyBull.forEach((elm) => elm.draw());
-        this.clearBullets();
+        this.enemyBull.forEach((elm) => elm.draw())
+        this.clearBullets()
     }
 
     move() {
         this.posY += this.vel
-
-
     }
 
     shoot() {
-        // let playerShoot = new Audio('./sounds/fire/TIE fighter fire 1.mp3');
-        // playerShoot.play()
-        // playerShoot.volume = 0.1
+        let playerShoot = new Audio('./sounds/fire/TIE fighter fire 1.mp3');
+        playerShoot.play()
+        playerShoot.volume = 0.1
         this.enemyBull.push(new EnemyBullets(this.ctx, this.posX, this.posY, this.fighterW, this.fighterH))
-
-
-
-
     }
+
     clearBullets() {
         this.enemyBull = this.enemyBull.filter(elm => elm.posY >= -1)
     }
-
 
 }
 
@@ -69,15 +62,31 @@ class TieStriker extends TieFighter {
         this.image = new Image()
         this.image.src = './img/tie fighter/Tie Striker.B09.shadowless.2k.png'
 
+        this.enemyBull = []
+        this.shoot()
+
     }
 
     // INTENTAR QUE NO SE SOLAPEN CUANDO SE HACEN SPAWN
     draw() {
         this.ctx.drawImage(this.image, this.posX, this.posY, this.fighterW, this.fighterH)
         this.move()
+        this.enemyBull.forEach((elm) => elm.draw())
+        this.clearBullets()
     }
 
     move() {
         this.posY += this.vel
     }
+    shoot() {
+        // let playerShoot = new Audio('./sounds/fire/TIE fighter fire 1.mp3');
+        // playerShoot.play()
+        // playerShoot.volume = 0.1
+        this.enemyBull.push(new EnemyBullets(this.ctx, this.posX, this.posY, this.fighterW, this.fighterH))
+    }
+
+    clearBullets() {
+        this.enemyBull = this.enemyBull.filter(elm => elm.posY >= -1)
+    }
+
 }

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Xwing</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        canvas {
+            border: 10px solid white
+        }
+    </style>
+</head>
+<body>
+    <canvas id='badEnding'></canvas>
+    <video src="./video/Xwing die video.mp4" type='video.mp4'></video>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function(){
+            var v = document.getElementById('v');
+            var canvas = document.getElementById('c');
+            var context = canvas.getContext('2d');
+        
+            var cw = Math.floor(canvas.clientWidth / 100);
+            var ch = Math.floor(canvas.clientHeight / 100);
+            canvas.width = cw;
+            canvas.height = ch;
+        
+            v.addEventListener('play', function(){
+                draw(this,context,cw,ch);
+            },false);
+        
+        },false);
+        
+        function draw(v,c,w,h) {
+            if(v.paused || v.ended) return false;
+            c.drawImage(v,0,0,w,h);
+            setTimeout(draw,20,v,c,w,h);
+        }
+        </script>
+</body>
+</html>

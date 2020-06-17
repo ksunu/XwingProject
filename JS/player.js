@@ -7,11 +7,13 @@ class Player {
         this.posX = this.canvasSize.w / 2 - 50;
         this.posY = this.canvasSize.h - 150;
 
-        this.playerW = 100;
-        this.playerH = 100;
+        this.playerW = 150;
+        this.playerH = 150;
 
         this.image = new Image();
-        this.image.src = "./img/pngwave.png";
+        this.image.src = "./img/Luke's X-Wing left (4).png";
+        this.image.frames = 3
+        this.image.framesIndex = 1
 
         this.vel = 20;
         this.life = 3
@@ -30,18 +32,40 @@ class Player {
     }
 
     // ---PLAYER DRAW---
-    draw() {
-        this.setEventListeners();
+    draw(framesCounter) {
+        this.setEventListeners()
 
-        this.bullets.forEach((elm) => elm.draw());
+        this.bullets.forEach((elm) => elm.draw())
 
-        this.clearBullets();
+        this.clearBullets()
 
-        this.ctx.drawImage(this.image, this.posX, this.posY, this.playerW, this.playerH);
+        this.ctx.drawImage(
+            this.image,
+            this.image.framesIndex * Math.floor(this.image.width / this.image.frames),
+            0,
+            Math.floor(this.image.width / this.image.frames),
+            this.image.height,
+            this.posX,
+            this.posY,
+            this.playerW,
+            this.playerH
+        )
 
-        this.move();
+        // this.animate(framesCounter)
+
+        this.move()
+
+        this.drawLives()
 
         this.isDestroyed()
+    }
+
+    // ---PLAYER DRAW LIVES---
+    drawLives() {
+        this.ctx.beginPath()
+        this.ctx.fillStyle = "lightgreen"
+        this.ctx.font = "30px Arial"
+        this.ctx.fillText(`Hull Integrity: ${this.life}`, 30, 75)
     }
 
     // ---PLAYER SMOOTH MOVE---
@@ -57,11 +81,13 @@ class Player {
             case "left":
                 if (this.posX >= 30) {
                     this.posX -= this.vel;
+                    this.image.framesIndex = 0
                 }
                 break;
             case "right":
                 if (this.posX + 100 <= this.canvasSize.w - 30) {
                     this.posX += this.vel;
+                    this.image.framesIndex = 2
                 }
                 break;
             case "up":
@@ -75,9 +101,7 @@ class Player {
                 }
                 break;
             case "shoot":
-                if ("shoot" === true) {
-
-                }
+                if ("shoot" === true) {}
         }
     }
 
@@ -104,6 +128,9 @@ class Player {
             e.keyCode === this.keys.DOWN && this.move("down");
             e.keyCode === this.keys.SPACE && this.shoot("shoot");
         };
+        document.onkeyup = (e) => {
+            this.image.framesIndex = 1
+        }
     }
 
     // ---PLAYER IS DESTROYED---
