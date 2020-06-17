@@ -67,13 +67,13 @@ const Game = {
     },
 
     // ---GAME DRAW ALL---
-    drawAll(frames) {
+    drawAll() {
         this.background.draw()
         this.player.draw()
 
         this.tieFighter.forEach(elm => elm.draw())
 
-        this.helmet.draw(frames)
+        // this.helmet.draw()
 
         this.timer.draw()
 
@@ -127,13 +127,13 @@ const Game = {
 
     },
 
-    // ---GAME IS HIT---
+    // ---GAME IS HIT PLAYER BULLETS---
     isHit() {
         // ajustar width izq del enemigo
         this.tieFighter.some(tie => {
             this.player.bullets.forEach(elm => {
                 if (
-                    (elm.posX < tie.posX + tie.fighterW + 10) &&
+                    (elm.posX < tie.posX + tie.fighterW + 40) &&
                     (elm.posX + elm.width > tie.posX) &&
                     (elm.posY < tie.posY + tie.fighterH) &&
                     (elm.height + elm.posY > tie.posY)) {

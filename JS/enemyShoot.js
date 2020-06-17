@@ -1,3 +1,4 @@
+// ---ENEMY SHOOT
 class EnemyBullets {
     constructor(ctx, fighterPosX, fighterPosY, fighterW, fighterH) {
         this.ctx = ctx
@@ -23,11 +24,12 @@ class EnemyBullets {
     move() {
         this.posY += this.vel
     }
-    hitplayer(){
-        this.some(elm =>{
-            if(this.player.posY + this.player.playerH > elm.posY){
+
+    hitplayer() {
+        this.some(elm => {
+            if (this.player.posY + this.player.playerH > elm.posY) {
                 player.life -= 1
-            } }
-            )
+            }
+        })
     }
 }

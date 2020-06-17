@@ -23,7 +23,7 @@ class TieFighter {
         this.shoot()
 
 
-    
+
     }
 
     // INTENTAR QUE NO SE SOLAPEN CUANDO SE HACEN SPAWN
@@ -36,24 +36,24 @@ class TieFighter {
 
     move() {
         this.posY += this.vel
-     
-        
+
+
     }
 
     shoot() {
-        // let playerShoot = new Audio('');
+        // let playerShoot = new Audio('./sounds/fire/TIE fighter fire 1.mp3');
         // playerShoot.play()
         // playerShoot.volume = 0.1
         this.enemyBull.push(new EnemyBullets(this.ctx, this.posX, this.posY, this.fighterW, this.fighterH))
-        
 
-        
-        
+
+
+
     }
     clearBullets() {
         this.enemyBull = this.enemyBull.filter(elm => elm.posY >= -1)
     }
- 
+
 
 }
 

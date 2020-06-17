@@ -1,4 +1,4 @@
-// ------PLAYER CHA-------
+// ------PLAYER CHARACTER-------
 class Player {
     constructor(ctx, canvasSize) {
         this.ctx = ctx;
@@ -29,6 +29,7 @@ class Player {
 
     }
 
+    // ---PLAYER DRAW---
     draw() {
         this.setEventListeners();
 
@@ -43,11 +44,14 @@ class Player {
         this.isDestroyed()
     }
 
+    // ---PLAYER SMOOTH MOVE---
+    // *****PENDIENTE*****
     smoothMovement() {
         this.posX += this.speedX
         this.posY += this.speedY
     }
 
+    // ---PLAYER MOVE---
     move(dir) { // el uso de una tecla anula a las otras
         switch (dir) {
             case "left":
@@ -77,6 +81,7 @@ class Player {
         }
     }
 
+    // ---PLAYER SHOOT---
     shoot() {
         let playerShoot = new Audio('./sounds/fire/XWing fire.mp3');
         playerShoot.play()
@@ -84,10 +89,12 @@ class Player {
         this.bullets.push(new Bullets(this.ctx, this.posX, this.posY, this.playerW, this.playerH))
     }
 
+    // ---PLAYER BULLETS CLEAR---
     clearBullets() {
         this.bullets = this.bullets.filter(elm => elm.posY >= -1)
     }
 
+    // ---PLAYER EVENT LISTENERS---
     setEventListeners() {
         document.onkeydown = (e) => {
             e.preventDefault() // <=== evita mover la pantalla al apretar las teclas
@@ -99,6 +106,7 @@ class Player {
         };
     }
 
+    // ---PLAYER IS DESTROYED---
     isDestroyed() {
         if (this.life === 0) {
             let xWingExplosion = new Audio('/sounds/explode/XWing explode.mp3')

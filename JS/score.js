@@ -1,3 +1,4 @@
+// ---SCORE BOARD---
 class Score {
     constructor(ctx, canvasSize) {
         this.ctx = ctx
