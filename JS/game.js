@@ -92,6 +92,7 @@ const Game = {
         this.playerLife.draw()
         this.item.forEach(elm => elm.draw());
 
+
     },
 
     // ---GAME CLEAR---
@@ -101,7 +102,9 @@ const Game = {
 
     // ---GAME GENERATE LIFE ITEM---
     generateItem() {
-        this.framesCounter % Math.floor(150 + (Math.random() * 10)) === 0 && this.item.push(new Item(this.ctx, this.canvasSize.w, this.canvasSize.h))
+        this.framesCounter % Math.floor(150 + (Math.random() * 10)) === 0 &&
+            this.item.push(new Item(this.ctx, this.canvasSize.w, this.canvasSize.h))
+
     },
 
     // ---GAME CLEAR ITEM---
@@ -190,6 +193,7 @@ const Game = {
                 tieExplosion.play()
                 tieExplosion.volume = 0.09
                 tieExplosion.duration = 1
+                // this.enemyExplosion.draw(this.framesCounter)
                 //******************************SET TIME OUT********/
                 // this.enemyExplosion.draw(this.framesCounter)
                 // this.enemyExplosion.draw()

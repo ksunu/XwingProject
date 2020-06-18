@@ -3,8 +3,8 @@ class EnemyExplosion {
         this.ctx = ctx
         this.canvasSize = canvasSize
 
-        this.posX = 400
-        this.posY = 400
+        this.posX = fighterPosX
+        this.posY = fighterPosY
 
         this.width = 100
         this.height = 100
@@ -32,7 +32,7 @@ class EnemyExplosion {
     }
 
     animate(framesCounter) {
-        if (framesCounter % 20 == 0) {
+        if (framesCounter % 5 == 0) {
             this.image.framesIndex++
         }
         if (this.image.framseIndex > this.image.frames - 1) {
