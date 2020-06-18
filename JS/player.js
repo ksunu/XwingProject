@@ -135,7 +135,7 @@ class Player {
 
     // ---PLAYER IS DESTROYED---
     isDestroyed() {
-        if (this.life === 0) {
+        if ( this.life === 0) {
             let xWingExplosion = new Audio('/sounds/explode/XWing explode.mp3')
             xWingExplosion.play()
             xWingExplosion.volume = 0.3

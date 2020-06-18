@@ -38,9 +38,9 @@ const Game = {
 
     // ---GAME Start---
     start() {
-        let backgrounBattle = new Audio('/sounds/background/10 The Battle Of Yavin.mp3');
-        backgrounBattle.play()
-        backgrounBattle.volume = 0.1
+        // let backgrounBattle = new Audio('/sounds/background/10 The Battle Of Yavin.mp3');
+        // backgrounBattle.play()
+        // backgrounBattle.volume = 0.1
         this.reset()
         this.interval = setInterval(() => {
             this.clear()
@@ -101,10 +101,7 @@ const Game = {
 
     // ---GAME GENERATE LIFE ITEM---
     generateItem() {
-        if (this.framesCounter % Math.floor(150 + (Math.random() * 10)) === 0) {
-            this.item.push(new Item(this.ctx, this.canvasSize.w, this.canvasSize.h))
-
-        }
+        this.framesCounter % Math.floor(150 + (Math.random() * 10)) === 0 && this.item.push(new Item(this.ctx, this.canvasSize.w, this.canvasSize.h))
     },
 
     // ---GAME CLEAR ITEM---
@@ -146,10 +143,7 @@ const Game = {
 
     // ---GAME ENEMY SHOOT---
     enemyShoot() {
-        if (this.framesCounter % Math.floor(400 + (Math.random() * 10)) === 0) {
-            this.tieFighter.shoot()
-
-        }
+        this.framesCounter % Math.floor(400 + (Math.random() * 10)) === 0 && this.tieFighter.shoot()
     },
 
     // ---GAME IS COLLISION---
@@ -194,7 +188,7 @@ const Game = {
                 this.score.score0 += tie.points
                 let tieExplosion = new Audio('/sounds/explode/TIE fighter explode.mp3');
                 tieExplosion.play()
-                tieExplosion.volume = 0.05
+                tieExplosion.volume = 0.09
                 tieExplosion.duration = 1
                 //******************************SET TIME OUT********/
                 // this.enemyExplosion.draw(this.framesCounter)
@@ -227,16 +221,16 @@ const Game = {
     // ---GAME END---
     endGame() {
         setTimeout((() => {
-            if (this.timer.time === 0) {
+            if (this.timer.time === 0 || this.player.life === 0) {
                 clearInterval(this.interval)
-            } else if (this.player.life === 0) {
-                clearInterval(this.interval)
-                // let badEnding = new Video('./video/Xwing die video.mp4')
-                // badEnding.play()
-                // badEnding.volume = 0.3
-                // badEnding.duration = 1
             }
         }), 3000 / this.FPS)
+        // let badEnding = new Video('./video/Xwing die video.mp4')
+        // badEnding.play()
+        // badEnding.volume = 0.3
+        // badEnding.duration = 1
+
+
         this.player.isDestroyed()
     },
 

@@ -22,7 +22,6 @@ class TieFighter {
         this.enemyBull = []
         this.shoot()
 
-
     }
 
     // INTENTAR QUE NO SE SOLAPEN CUANDO SE HACEN SPAWN
@@ -47,7 +46,6 @@ class TieFighter {
     clearBullets() {
         this.enemyBull = this.enemyBull.filter(elm => elm.posY >= -1)
     }
-
 }
 
 class TieStriker extends TieFighter {
