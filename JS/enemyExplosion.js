@@ -3,26 +3,26 @@ class EnemyExplosion {
         this.ctx = ctx
         this.canvasSize = canvasSize
 
-        this.posX = fighterPosX
-        this.posY = fighterPosY
+        this.posX = 400
+        this.posY = 400
 
         this.width = 100
         this.height = 100
 
-        this.image = new Image()
-        this.image.src = "./img/explosion/mejorado.png"
-        this.image.frames = 10
-        this.image.framesIndex = 0
+        this.imageExplosion = new Image()
+        this.imageExplosion.src = "./img/explosion/mejorado.png"
+        this.imageExplosion.frames = 10
+        this.imageExplosion.framesIndex = 0
 
     }
 
     draw(framesCounter) {
         this.ctx.drawImage(
-            this.image,
-            this.image.framesIndex * Math.floor(this.image.width / this.image.frames),
+            this.imageExplosion,
+            this.imageExplosion.framesIndex * Math.floor(this.imageExplosion.width / this.imageExplosion.frames),
             0,
-            Math.floor(this.image.width / this.image.frames),
-            this.image.height,
+            Math.floor(this.imageExplosion.width / this.imageExplosion.frames),
+            this.imageExplosion.height,
             this.posX,
             this.posY,
             this.width,
@@ -32,12 +32,13 @@ class EnemyExplosion {
     }
 
     animate(framesCounter) {
-        if (framesCounter % 5 == 0) {
-            this.image.framesIndex++
+        if (framesCounter % 15 == 0) {
+            this.imageExplosion.framesIndex++
         }
-        if (this.image.framseIndex > this.image.frames - 1) {
-            this.image.framesIndex = 0
+        if (this.imageExplosion.framseIndex > this.imageExplosion.frames - 1) {
+            this.imageExplosion.framesIndex = 0
         }
     }
+
 
 }

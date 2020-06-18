@@ -22,6 +22,7 @@ class TieFighter {
         this.enemyBull = []
         this.shoot()
 
+
     }
 
     // INTENTAR QUE NO SE SOLAPEN CUANDO SE HACEN SPAWN
@@ -30,6 +31,7 @@ class TieFighter {
         this.move()
         this.enemyBull.forEach((elm) => elm.draw())
         this.clearBullets()
+
     }
 
     move() {
@@ -46,6 +48,7 @@ class TieFighter {
     clearBullets() {
         this.enemyBull = this.enemyBull.filter(elm => elm.posY >= -1)
     }
+
 }
 
 class TieStriker extends TieFighter {
@@ -76,6 +79,7 @@ class TieStriker extends TieFighter {
     move() {
         this.posY += this.vel
     }
+    
     shoot() {
         // let playerShoot = new Audio('./sounds/fire/TIE fighter fire 1.mp3');
         // playerShoot.play()

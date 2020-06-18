@@ -1,6 +1,52 @@
+html {
+    height: 100%;
+}
+
+
+
 body {
-    background-color:  red;
-    background-image: url(https://gallery.yopriceville.com/var/albums/Space/Star_Wars_X_Wing_4K_Wallpaper.jpg?m=1446757863);
+    background: url('../img/Initial/TRUE star-wars-backgrounds-25-1536x864.jpg') no-repeat center center fixed;
+     height: 100vh;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    max-width: 100%;
+    position: relative;
+    min-height: 100%;
+    max-height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center; 
+}
 
+.logo, img{
+    width: 600px;
+    padding-bottom: 80px;
+}
 
+.text {
+    position: absolute;
+    bottom: 0;
+    display: flex;
+	flex-direction: column;
+	justify-content: flex-end;
+    align-items: center;
+    margin-bottom: 50px;
+ 
+}
+
+a {
+    font-family: 'Bungee', cursive ;
+    color: yellow;
+    text-decoration: none;
+    font-size: 3em;
+    margin-bottom: 10px ;
+}
+
+p {
+    font-family: 'Bungee', cursive ;
+    color: red;
+    padding-top: 10px;
 }

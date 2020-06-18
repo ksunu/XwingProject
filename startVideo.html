@@ -3,10 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>X-Wing</title>
+    <title>X-wing</title>
+    <link rel="stylesheet" href="./startVideoStyle.css">
 </head>
 <body>
-    <video id="video" src="./video/Xwing die video.mp4"></video>
+    <video id="video" src="./video/gameStart.mp4"></video>
 
     <script>
        window.onload = function(){
@@ -14,12 +15,13 @@
     }
         document.addEventListener('keypress', logKey) 
         function logKey (e) {
-            e = window.open("./index.html", "_self")
+            e = window.open("./game.html", "_self")
         }
  
 
 
     
     </script>
+
 </body>
 </html>

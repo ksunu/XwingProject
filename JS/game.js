@@ -92,7 +92,6 @@ const Game = {
         this.playerLife.draw()
         this.item.forEach(elm => elm.draw());
 
-
     },
 
     // ---GAME CLEAR---
@@ -193,15 +192,11 @@ const Game = {
                 tieExplosion.play()
                 tieExplosion.volume = 0.09
                 tieExplosion.duration = 1
-                // this.enemyExplosion.draw(this.framesCounter)
                 //******************************SET TIME OUT********/
-                // this.enemyExplosion.draw(this.framesCounter)
-                // this.enemyExplosion.draw()
-                // this.enemyExplosion = new EnemyExplosion(this.ctx, this.canvasSize)
-
+                this.enemyExplosion.draw(this.framesCounter)
+                console.log(this.enemyExplosion.draw)
             }
         })
-
     },
 
     // ---GAME PLAYER TAKE DAMAGE---
@@ -227,12 +222,10 @@ const Game = {
         setTimeout((() => {
             if (this.timer.time === 0 || this.player.life === 0) {
                 clearInterval(this.interval)
+                window.open("./badEnding.html", "_self")
+        
             }
         }), 3000 / this.FPS)
-        // let badEnding = new Video('./video/Xwing die video.mp4')
-        // badEnding.play()
-        // badEnding.volume = 0.3
-        // badEnding.duration = 1
 
 
         this.player.isDestroyed()
