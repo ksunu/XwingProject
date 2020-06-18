@@ -20,7 +20,7 @@ class Timer {
 
     }
     setTimer() {
-        this.time = 30;
+        this.time = 90;
         const seconds = setInterval(() => {
             this.time--;
             this.time <= 0 && clearInterval(seconds)

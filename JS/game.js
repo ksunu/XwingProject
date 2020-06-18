@@ -8,9 +8,9 @@ const Game = {
     ctx: undefined,
     background: undefined,
     player: undefined,
-    // enemyExplosion: [],
     item: [],
     tieFighter: [],
+    enemyExplosion: [],
     score: 0,
     playerLife: 3,
     canvasSize: {
@@ -63,6 +63,8 @@ const Game = {
             this.takeDamage()
 
             this.endGame()
+
+            console.log('traza', 'expl', this.enemyExplosion)
         }, 1000 / this.FPS);
     },
 
@@ -75,7 +77,7 @@ const Game = {
         this.tieFighter = []
         this.playerLife = new PlayerLife(this.ctx, this.canvasSize)
         this.item = []
-        // this.enemyExplosion = []
+        this.enemyExplosion = []
     },
 
     // ---GAME DRAW ALL---
@@ -84,8 +86,9 @@ const Game = {
         this.player.draw()
 
         this.tieFighter.forEach(elm => elm.draw())
-        // this.enemyExplosion.forEach(elm => elm.draw(this.framesCounter))
-        // console.log('traza', 'drawAll', this.enemyExplosion)
+
+        this.enemyExplosion.forEach(elm => elm.draw(this.framesCounter))
+        this.explosionClear()
 
         this.timer.draw()
 
@@ -174,9 +177,11 @@ const Game = {
                     (elm.posX + elm.width > tie.posX) &&
                     (elm.posY < tie.posY + tie.fighterH) &&
                     (elm.height + elm.posY > tie.posY)) {
+                    console.log('traza', 'tie', tie)
                     tie.life--
                     this.destroyTie()
                     elm.posY = this.canvasSize - 1
+                    this.enemyExplosion.push(new EnemyExplosion(this.ctx, tie.posX, tie.posY))
                 }
             })
         })
@@ -187,9 +192,9 @@ const Game = {
     //     console.log('traza', 'generate', this.enemyExplosion)
     // },
 
-    // explosionClear() {
-    //     this.enemyExplosion = this.enemyExplosion.filter(elm => elm.posY <= this.canvasSize.h)
-    // },
+    explosionClear() {
+        this.enemyExplosion = this.enemyExplosion.filter(elm => elm.posY <= this.canvasSize.h)
+    },
 
     // ---GAME DESTROY TIE---
     destroyTie() {
@@ -203,9 +208,9 @@ const Game = {
                 tieExplosion.duration = 1
                 //******************************SET TIME OUT********/
 
+
             }
         })
-        // this.generateEnemyExplosion(this.ctx, this.PosX, this.PosY)
         // console.log(this.generateEnemyExplosion)
         // console.log(this.enemyExplosion)
     },

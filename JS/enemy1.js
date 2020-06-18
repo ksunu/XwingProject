@@ -22,10 +22,9 @@ class TieFighter {
         this.enemyBull = []
         this.shoot()
 
-        this.explosion = []
-        this.generateExplosion()
+        // this.explosion = []
 
-        console.log(this.explosion)
+
     }
 
     // ---ENEMY1 DRAW---
@@ -35,9 +34,6 @@ class TieFighter {
 
         this.enemyBull.forEach((elm) => elm.draw())
         this.clearBullets()
-
-        this.explosion.forEach((elm) => elm.draw(this.framesCounter))
-        this.clearExplosion()
 
     }
 
@@ -59,19 +55,10 @@ class TieFighter {
         this.enemyBull = this.enemyBull.filter(elm => elm.posY >= -1)
     }
 
-    // ---GENERATE EXPLOSION---
-    generateExplosion() {
-        // if (this.life === 0){
-        this.explosion.push(new EnemyExplosion(this.ctx, this.posX, this.posY, this.width, this.height))
-        console.log('traza', 'explosionEnemy', this.enemyExplosion)
-        // }
-
-    }
-
     // ---CLEAR EXPLOSION---
-    clearExplosion() {
-        this.explosion = this.explosion.filter(elm => elm.posY >= -1)
-    }
+    // clearExplosion() {
+    //     this.explosion = this.explosion.filter(elm => elm.posY >= -1)
+    // }
 
 }
 
@@ -108,9 +95,9 @@ class TieStriker extends TieFighter {
 
     // ---ENEMY2 SHOOT
     shoot() {
-        // let playerShoot = new Audio('./sounds/fire/TIE fighter fire 1.mp3');
-        // playerShoot.play()
-        // playerShoot.volume = 0.1
+        let playerShoot = new Audio('./sounds/fire/TIE fighter fire 1.mp3');
+        playerShoot.play()
+        playerShoot.volume = 0.1
         this.enemyBull.push(new EnemyBullets(this.ctx, this.posX, this.posY, this.fighterW, this.fighterH))
     }
 

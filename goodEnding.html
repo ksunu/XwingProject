@@ -1,24 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>X-Wing</title>
     <link rel="stylesheet" href="/CSS/videoStyle.css">
 </head>
+
 <body>
     <video id="video" src="./video/ending.mp4"></video>
 
     <script>
-       window.onload = function(){
-        let video = document.getElementById("video").play()
-    }
-        document.addEventListener('keypress', logKey) 
-        function logKey (e) {
+        window.onload = function () {
+            let video = document.getElementById("video").play()
+        }
+        document.addEventListener('keypress', logKey)
+
+        function logKey(e) {
             e = window.open("./goodFinalScreen.html", "_self")
         }
-
     </script>
 
 </body>
+
 </html>

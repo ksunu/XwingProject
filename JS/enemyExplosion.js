@@ -2,11 +2,11 @@ class EnemyExplosion {
     constructor(ctx, fighterPosX, fighterPosY, fighterW, fighterH) {
         this.ctx = ctx
 
-        this.posX = 0
-        this.posY = 0
+        this.posX = fighterPosX
+        this.posY = fighterPosY
 
-        this.width = 100
-        this.height = 100
+        // this.width = 100
+        // this.height = 100
 
         this.vel = 0.1
 
