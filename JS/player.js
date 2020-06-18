@@ -24,7 +24,6 @@ class Player {
             UP: 38,
             DOWN: 40,
             SPACE: 32,
-            // ENTER: 13,
         };
 
         this.bullets = [];
@@ -69,14 +68,14 @@ class Player {
     }
 
     // ---PLAYER SMOOTH MOVE---
-    // *****PENDIENTE*****
+
     smoothMovement() {
         this.posX += this.speedX
         this.posY += this.speedY
     }
 
     // ---PLAYER MOVE---
-    move(dir) { // el uso de una tecla anula a las otras
+    move(dir) { 
         switch (dir) {
             case "left":
                 if (this.posX >= 30) {
@@ -121,7 +120,7 @@ class Player {
     // ---PLAYER EVENT LISTENERS---
     setEventListeners() {
         document.onkeydown = (e) => {
-            e.preventDefault() // <=== evita mover la pantalla al apretar las teclas
+            e.preventDefault() 
             e.keyCode === this.keys.LEFT && this.move("left");
             e.keyCode === this.keys.RIGHT && this.move("right");
             e.keyCode === this.keys.UP && this.move("up");

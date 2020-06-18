@@ -22,22 +22,31 @@ class TieFighter {
         this.enemyBull = []
         this.shoot()
 
+        this.explosion = []
+        this.generateExplosion()
 
+        console.log(this.explosion)
     }
 
-    // INTENTAR QUE NO SE SOLAPEN CUANDO SE HACEN SPAWN
+    // ---ENEMY1 DRAW---
     draw() {
         this.ctx.drawImage(this.image, this.posX, this.posY, this.fighterW, this.fighterH)
         this.move()
+
         this.enemyBull.forEach((elm) => elm.draw())
         this.clearBullets()
 
+        this.explosion.forEach((elm) => elm.draw(this.framesCounter))
+        this.clearExplosion()
+
     }
 
+    // ---ENEMY1 MOVE---
     move() {
         this.posY += this.vel
     }
 
+    // ---ENEMY SHOOT---
     shoot() {
         let playerShoot = new Audio('./sounds/fire/TIE fighter fire 1.mp3');
         playerShoot.play()
@@ -45,12 +54,28 @@ class TieFighter {
         this.enemyBull.push(new EnemyBullets(this.ctx, this.posX, this.posY, this.fighterW, this.fighterH))
     }
 
+    // ---ENEMY CLEAR BULLETS---
     clearBullets() {
         this.enemyBull = this.enemyBull.filter(elm => elm.posY >= -1)
     }
 
+    // ---GENERATE EXPLOSION---
+    generateExplosion() {
+        // if (this.life === 0){
+        this.explosion.push(new EnemyExplosion(this.ctx, this.posX, this.posY, this.width, this.height))
+        console.log('traza', 'explosionEnemy', this.enemyExplosion)
+        // }
+
+    }
+
+    // ---CLEAR EXPLOSION---
+    clearExplosion() {
+        this.explosion = this.explosion.filter(elm => elm.posY >= -1)
+    }
+
 }
 
+// ---ENEMY2 (HERENCIA ENEMY1)
 class TieStriker extends TieFighter {
     constructor(ctx, canvasSize) {
         super(ctx, canvasSize)
@@ -68,7 +93,7 @@ class TieStriker extends TieFighter {
 
     }
 
-    // INTENTAR QUE NO SE SOLAPEN CUANDO SE HACEN SPAWN
+    // ---ENEMY2 DRAW---
     draw() {
         this.ctx.drawImage(this.image, this.posX, this.posY, this.fighterW, this.fighterH)
         this.move()
@@ -76,10 +101,12 @@ class TieStriker extends TieFighter {
         this.clearBullets()
     }
 
+    // ---ENEMY2 MOVE---
     move() {
         this.posY += this.vel
     }
-    
+
+    // ---ENEMY2 SHOOT
     shoot() {
         // let playerShoot = new Audio('./sounds/fire/TIE fighter fire 1.mp3');
         // playerShoot.play()
@@ -87,6 +114,7 @@ class TieStriker extends TieFighter {
         this.enemyBull.push(new EnemyBullets(this.ctx, this.posX, this.posY, this.fighterW, this.fighterH))
     }
 
+    // ---ENEMY2 CLEAR BULLETS---
     clearBullets() {
         this.enemyBull = this.enemyBull.filter(elm => elm.posY >= -1)
     }

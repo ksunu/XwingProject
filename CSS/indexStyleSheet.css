@@ -6,7 +6,7 @@ html {
 
 body {
     background: url('../img/Initial/TRUE star-wars-backgrounds-25-1536x864.jpg') no-repeat center center fixed;
-     height: 100vh;
+    height: 100vh;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -18,10 +18,11 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center; 
+    align-items: center;
 }
 
-.logo, img{
+.logo,
+img {
     width: 600px;
     padding-bottom: 80px;
 }
@@ -30,23 +31,24 @@ body {
     position: absolute;
     bottom: 0;
     display: flex;
-	flex-direction: column;
-	justify-content: flex-end;
+    flex-direction: column;
+    justify-content: flex-end;
     align-items: center;
     margin-bottom: 50px;
- 
+
 }
 
 a {
-    font-family: 'Bungee', cursive ;
+    font-family: 'Bungee', cursive;
     color: yellow;
     text-decoration: none;
     font-size: 3em;
-    margin-bottom: 10px ;
+    margin-bottom: 10px;
+    text
 }
 
 p {
-    font-family: 'Bungee', cursive ;
+    font-family: 'Bungee', cursive;
     color: red;
     padding-top: 10px;
 }

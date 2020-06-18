@@ -1,13 +1,11 @@
 // ---PLAYER BULLETS---
-class Bullets { //intervalos de disparo. 
+class Bullets { 
     constructor(ctx, playerPosX, playerPosY, playerWidth, playerHeight) {
         this.ctx = ctx
 
         this.posX = playerPosX + playerWidth / 2 - 10
         this.posY = playerPosY
 
-        // this.playerPosX0 = playerPosX0
-        // this.playerPosY0 = playerPosY0
 
         this.playerWidth = playerWidth
         this.playerHeight = playerHeight

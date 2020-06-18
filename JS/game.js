@@ -8,7 +8,7 @@ const Game = {
     ctx: undefined,
     background: undefined,
     player: undefined,
-    enemyExplosion: undefined,
+    // enemyExplosion: [],
     item: [],
     tieFighter: [],
     score: 0,
@@ -38,9 +38,9 @@ const Game = {
 
     // ---GAME Start---
     start() {
-        // let backgrounBattle = new Audio('/sounds/background/10 The Battle Of Yavin.mp3');
-        // backgrounBattle.play()
-        // backgrounBattle.volume = 0.1
+        let backgrounBattle = new Audio('/sounds/background/10 The Battle Of Yavin.mp3');
+        backgrounBattle.play()
+        backgrounBattle.volume = 0.1
         this.reset()
         this.interval = setInterval(() => {
             this.clear()
@@ -54,14 +54,14 @@ const Game = {
             this.clearItem()
             this.isItemCollision()
 
+            // this.generateEnemyExplosion()
+            // this.explosionClear()
 
             this.framesCounter > 5000 ? this.framesCounter = 0 : this.framesCounter++
 
             this.isHit()
             this.takeDamage()
-            // this.takeLives()
 
-            // this.gameOver()
             this.endGame()
         }, 1000 / this.FPS);
     },
@@ -75,7 +75,7 @@ const Game = {
         this.tieFighter = []
         this.playerLife = new PlayerLife(this.ctx, this.canvasSize)
         this.item = []
-        this.enemyExplosion = new EnemyExplosion(this.ctx, this.canvasSize)
+        // this.enemyExplosion = []
     },
 
     // ---GAME DRAW ALL---
@@ -84,6 +84,8 @@ const Game = {
         this.player.draw()
 
         this.tieFighter.forEach(elm => elm.draw())
+        // this.enemyExplosion.forEach(elm => elm.draw(this.framesCounter))
+        // console.log('traza', 'drawAll', this.enemyExplosion)
 
         this.timer.draw()
 
@@ -131,10 +133,10 @@ const Game = {
         if (this.framesCounter % Math.floor(150 + (Math.random() * 10)) === 0) {
             this.tieFighter.push(new TieFighter(this.ctx, this.canvasSize.w, this.canvasSize.h))
             this.tieFighter.push(new TieStriker(this.ctx, this.canvasSize.w, this.canvasSize.h))
-            // let tieEngine = new Audio('/sounds/fire/TIE fighter flyby 1.mp3');
-            // tieEngine.play()
-            // tieEngine.volume = 0.1
-            // tieEngine.duration = 1
+            let tieEngine = new Audio('/sounds/fire/TIE fighter flyby 1.mp3');
+            tieEngine.play()
+            tieEngine.volume = 0.1
+            tieEngine.duration = 1
         }
     },
 
@@ -165,7 +167,6 @@ const Game = {
 
     // ---GAME IS HIT PLAYER BULLETS---
     isHit() {
-        // ajustar width izq del enemigo
         this.tieFighter.some(tie => {
             this.player.bullets.forEach(elm => {
                 if (
@@ -179,8 +180,16 @@ const Game = {
                 }
             })
         })
-
     },
+
+    // generateEnemyExplosion() {
+    //     this.enemyExplosion.push(new EnemyExplosion(this.ctx, this.fighterPosX, this.fighterPosY, this.width, this.height))
+    //     console.log('traza', 'generate', this.enemyExplosion)
+    // },
+
+    // explosionClear() {
+    //     this.enemyExplosion = this.enemyExplosion.filter(elm => elm.posY <= this.canvasSize.h)
+    // },
 
     // ---GAME DESTROY TIE---
     destroyTie() {
@@ -193,10 +202,12 @@ const Game = {
                 tieExplosion.volume = 0.09
                 tieExplosion.duration = 1
                 //******************************SET TIME OUT********/
-                this.enemyExplosion.draw(this.framesCounter)
-                console.log(this.enemyExplosion.draw)
+
             }
         })
+        // this.generateEnemyExplosion(this.ctx, this.PosX, this.PosY)
+        // console.log(this.generateEnemyExplosion)
+        // console.log(this.enemyExplosion)
     },
 
     // ---GAME PLAYER TAKE DAMAGE---
@@ -220,26 +231,18 @@ const Game = {
     // ---GAME END---
     endGame() {
         setTimeout((() => {
-            if (this.timer.time === 0 || this.player.life === 0) {
+            if (this.timer.time === 0) {
+                clearInterval(this.interval)
+                window.open("./goodEnding.html", "_self")
+            }
+            if (this.player.life === 0) {
                 clearInterval(this.interval)
                 window.open("./badEnding.html", "_self")
-        
             }
         }), 3000 / this.FPS)
 
 
         this.player.isDestroyed()
     },
-
-    // gameOver() {
-    //     if (this.player.life === 0) {
-    //         clearInterval(this.interval)
-    //         let xWingExplosion = new Audio('/sounds/explode/XWing explode.mp3')
-    //         xWingExplosion.play()
-    //         xWingExplosion.volume = 0.3
-    //         xWingExplosion.duration = 1
-    //     }
-    // }
-
 
 };

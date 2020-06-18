@@ -1,13 +1,14 @@
 class EnemyExplosion {
-    constructor(ctx, fighterPosX, fighterPosY, canvasSize) {
+    constructor(ctx, fighterPosX, fighterPosY, fighterW, fighterH) {
         this.ctx = ctx
-        this.canvasSize = canvasSize
 
-        this.posX = 400
-        this.posY = 400
+        this.posX = 0
+        this.posY = 0
 
         this.width = 100
         this.height = 100
+
+        this.vel = 0.1
 
         this.imageExplosion = new Image()
         this.imageExplosion.src = "./img/explosion/mejorado.png"
@@ -23,8 +24,8 @@ class EnemyExplosion {
             0,
             Math.floor(this.imageExplosion.width / this.imageExplosion.frames),
             this.imageExplosion.height,
-            this.posX,
-            this.posY,
+            this.fighterPosX,
+            this.fighterPosY,
             this.width,
             this.height
         )
@@ -32,12 +33,16 @@ class EnemyExplosion {
     }
 
     animate(framesCounter) {
-        if (framesCounter % 15 == 0) {
+        if (framesCounter % 20 == 0) {
             this.imageExplosion.framesIndex++
         }
         if (this.imageExplosion.framseIndex > this.imageExplosion.frames - 1) {
             this.imageExplosion.framesIndex = 0
         }
+    }
+
+    move() {
+        this.posY += this.vel
     }
 
 
