@@ -38,7 +38,7 @@ const Game = {
 
     // ---GAME Start---
     start() {
-        let backgrounBattle = new Audio('/sounds/background/10 The Battle Of Yavin.mp3');
+        let backgrounBattle = new Audio('./sounds/background/10 The Battle Of Yavin.mp3');
         backgrounBattle.play()
         backgrounBattle.volume = 0.3
         this.reset()
@@ -129,7 +129,7 @@ const Game = {
         if (this.framesCounter % Math.floor(150 + (Math.random() * 10)) === 0) {
             this.tieFighter.push(new TieFighter(this.ctx, this.canvasSize.w, this.canvasSize.h))
             this.tieFighter.push(new TieStriker(this.ctx, this.canvasSize.w, this.canvasSize.h))
-            let tieEngine = new Audio('/sounds/fire/TIE fighter flyby 1.mp3');
+            let tieEngine = new Audio('./sounds/fire/TIE fighter flyby 1.mp3');
             tieEngine.play()
             tieEngine.volume = 0.1
             tieEngine.duration = 1
@@ -187,7 +187,7 @@ const Game = {
             if (tie.life === 0) {
                 tie.posY = this.canvasSize.h - 1
                 this.score.score0 += tie.points
-                let tieExplosion = new Audio('/sounds/explode/TIE fighter explode.mp3');
+                let tieExplosion = new Audio('./sounds/explode/TIE fighter explode.mp3');
                 tieExplosion.play()
                 tieExplosion.volume = 0.2
                 tieExplosion.duration = 1
