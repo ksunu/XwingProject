@@ -21,10 +21,6 @@ class TieFighter {
         this.image.src = './img/tie fighter/Tie Fighter.B09.shadowless.2k (1).png'
         this.enemyBull = []
         this.shoot()
-
-        // this.explosion = []
-
-
     }
 
     // ---ENEMY1 DRAW---
@@ -54,12 +50,6 @@ class TieFighter {
     clearBullets() {
         this.enemyBull = this.enemyBull.filter(elm => elm.posY >= -1)
     }
-
-    // ---CLEAR EXPLOSION---
-    // clearExplosion() {
-    //     this.explosion = this.explosion.filter(elm => elm.posY >= -1)
-    // }
-
 }
 
 // ---ENEMY2 (HERENCIA ENEMY1)
@@ -77,7 +67,6 @@ class TieStriker extends TieFighter {
 
         this.enemyBull = []
         this.shoot()
-
     }
 
     // ---ENEMY2 DRAW---

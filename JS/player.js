@@ -50,8 +50,6 @@ class Player {
             this.playerH
         )
 
-        // this.animate(framesCounter)
-
         this.move()
 
         this.drawLives()
@@ -75,7 +73,7 @@ class Player {
     }
 
     // ---PLAYER MOVE---
-    move(dir) { 
+    move(dir) {
         switch (dir) {
             case "left":
                 if (this.posX >= 30) {
@@ -120,21 +118,21 @@ class Player {
     // ---PLAYER EVENT LISTENERS---
     setEventListeners() {
         document.onkeydown = (e) => {
-            e.preventDefault() 
+            e.preventDefault()
             e.keyCode === this.keys.LEFT && this.move("left");
             e.keyCode === this.keys.RIGHT && this.move("right");
             e.keyCode === this.keys.UP && this.move("up");
             e.keyCode === this.keys.DOWN && this.move("down");
             e.keyCode === this.keys.SPACE && this.shoot("shoot");
         };
-        document.onkeyup = (e) => {
+        document.onkeyup = () => {
             this.image.framesIndex = 1
         }
     }
 
     // ---PLAYER IS DESTROYED---
     isDestroyed() {
-        if ( this.life === 0) {
+        if (this.life === 0) {
             let xWingExplosion = new Audio('/sounds/explode/XWing explode.mp3')
             xWingExplosion.play()
             xWingExplosion.volume = 0.3

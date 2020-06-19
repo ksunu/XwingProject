@@ -10,6 +10,7 @@ class Timer {
 
         this.setTimer()
     }
+
     draw() {
 
         this.ctx.beginPath()
@@ -17,8 +18,8 @@ class Timer {
         this.ctx.font = "30px Arial"
         this.ctx.fillText(`Time: ${this.time} seconds`, this.posX, this.posY)
 
-
     }
+
     setTimer() {
         this.time = 90;
         const seconds = setInterval(() => {

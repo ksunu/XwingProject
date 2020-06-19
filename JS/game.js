@@ -61,7 +61,6 @@ const Game = {
 
             this.framesCounter > 5000 ? this.framesCounter = 0 : this.framesCounter++
 
-            console.log('traza', 'expl', this.enemyExplosion)
         }, 1000 / this.FPS);
     },
 
@@ -85,10 +84,6 @@ const Game = {
         this.tieFighter.forEach(elm => elm.draw())
 
         this.enemyExplosion.forEach(elm => elm.draw(this.framesCounter))
-        console.log(this.enemyExplosion)
-        // this.explosionClear()
-
-        this.playerLife.draw()
 
         this.item.forEach(elm => elm.draw());
 
@@ -176,7 +171,6 @@ const Game = {
                     (elm.posY < tie.posY + tie.fighterH) &&
                     (elm.height + elm.posY > tie.posY)) {
                     this.enemyExplosion.push(new EnemyExplosion(this.ctx, tie.posX, tie.posY))
-                    console.log(this.enemyExplosion)
 
                     tie.life--
                     this.destroyTie()

@@ -15,9 +15,4 @@ class PlayerLife {
 
     }
 
-    draw() {
-        // const lifeOne = this.ctx.drawImage(this.image, this.posX, this.posY, this.width, this.height)
-        // const lifeTwo = this.ctx.drawImage(this.image, this.posX + 45, this.posY, this.width, this.height)
-        // const lifeThree = this.ctx.drawImage(this.image, this.posX + 90, this.posY, this.width, this.height)
-    }
 }
