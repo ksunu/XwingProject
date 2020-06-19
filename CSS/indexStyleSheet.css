@@ -44,11 +44,15 @@ a {
     text-decoration: none;
     font-size: 3em;
     margin-bottom: 10px;
-    text
 }
 
 p {
     font-family: 'Bungee', cursive;
     color: red;
     padding-top: 10px;
+}
+
+.instructions img {
+    width: 50px;
+    padding: 0
 }
