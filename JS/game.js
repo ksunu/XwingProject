@@ -40,7 +40,7 @@ const Game = {
     start() {
         let backgrounBattle = new Audio('/sounds/background/10 The Battle Of Yavin.mp3');
         backgrounBattle.play()
-        backgrounBattle.volume = 0.1
+        backgrounBattle.volume = 0.3
         this.reset()
         this.interval = setInterval(() => {
             this.clear()
