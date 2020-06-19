@@ -44,7 +44,7 @@ const Game = {
         this.reset()
         this.interval = setInterval(() => {
             this.clear()
-            this.drawAll(this.framesCounter)
+            this.drawAll()
 
             this.generateEnemy()
             this.clearEnemy()
@@ -54,15 +54,12 @@ const Game = {
             this.clearItem()
             this.isItemCollision()
 
-            // this.generateEnemyExplosion()
-            // this.explosionClear()
-
-            this.framesCounter > 5000 ? this.framesCounter = 0 : this.framesCounter++
-
             this.isHit()
             this.takeDamage()
 
             this.endGame()
+
+            this.framesCounter > 5000 ? this.framesCounter = 0 : this.framesCounter++
 
             console.log('traza', 'expl', this.enemyExplosion)
         }, 1000 / this.FPS);
@@ -88,15 +85,16 @@ const Game = {
         this.tieFighter.forEach(elm => elm.draw())
 
         this.enemyExplosion.forEach(elm => elm.draw(this.framesCounter))
-        this.explosionClear()
+        console.log(this.enemyExplosion)
+        // this.explosionClear()
+
+        this.playerLife.draw()
+
+        this.item.forEach(elm => elm.draw());
 
         this.timer.draw()
 
         this.score.draw()
-
-        this.playerLife.draw()
-        this.item.forEach(elm => elm.draw());
-
     },
 
     // ---GAME CLEAR---
@@ -177,23 +175,16 @@ const Game = {
                     (elm.posX + elm.width > tie.posX) &&
                     (elm.posY < tie.posY + tie.fighterH) &&
                     (elm.height + elm.posY > tie.posY)) {
-                    console.log('traza', 'tie', tie)
+                    this.enemyExplosion.push(new EnemyExplosion(this.ctx, tie.posX, tie.posY))
+                    console.log(this.enemyExplosion)
+
                     tie.life--
                     this.destroyTie()
                     elm.posY = this.canvasSize - 1
-                    this.enemyExplosion.push(new EnemyExplosion(this.ctx, tie.posX, tie.posY))
+
                 }
             })
         })
-    },
-
-    // generateEnemyExplosion() {
-    //     this.enemyExplosion.push(new EnemyExplosion(this.ctx, this.fighterPosX, this.fighterPosY, this.width, this.height))
-    //     console.log('traza', 'generate', this.enemyExplosion)
-    // },
-
-    explosionClear() {
-        this.enemyExplosion = this.enemyExplosion.filter(elm => elm.posY <= this.canvasSize.h)
     },
 
     // ---GAME DESTROY TIE---
@@ -204,15 +195,10 @@ const Game = {
                 this.score.score0 += tie.points
                 let tieExplosion = new Audio('/sounds/explode/TIE fighter explode.mp3');
                 tieExplosion.play()
-                tieExplosion.volume = 0.09
+                tieExplosion.volume = 0.2
                 tieExplosion.duration = 1
-                //******************************SET TIME OUT********/
-
-
             }
         })
-        // console.log(this.generateEnemyExplosion)
-        // console.log(this.enemyExplosion)
     },
 
     // ---GAME PLAYER TAKE DAMAGE---

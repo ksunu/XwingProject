@@ -1,31 +1,29 @@
 class EnemyExplosion {
-    constructor(ctx, fighterPosX, fighterPosY, fighterW, fighterH) {
+    constructor(ctx, fighterPosX, fighterPosY) {
         this.ctx = ctx
 
         this.posX = fighterPosX
         this.posY = fighterPosY
 
-        // this.width = 100
-        // this.height = 100
+        this.width = 100
+        this.height = 100
 
-        this.vel = 0.1
-
-        this.imageExplosion = new Image()
-        this.imageExplosion.src = "./img/explosion/mejorado.png"
-        this.imageExplosion.frames = 10
-        this.imageExplosion.framesIndex = 0
+        this.image = new Image()
+        this.image.src = "./img/explosion/mejorado.png"
+        this.image.frames = 10
+        this.image.framesIndex = 0
 
     }
 
     draw(framesCounter) {
         this.ctx.drawImage(
-            this.imageExplosion,
-            this.imageExplosion.framesIndex * Math.floor(this.imageExplosion.width / this.imageExplosion.frames),
+            this.image,
+            this.image.framesIndex * Math.floor(this.image.width / this.image.frames),
             0,
-            Math.floor(this.imageExplosion.width / this.imageExplosion.frames),
-            this.imageExplosion.height,
-            this.fighterPosX,
-            this.fighterPosY,
+            Math.floor(this.image.width / this.image.frames),
+            this.image.height,
+            this.posX,
+            this.posY,
             this.width,
             this.height
         )
@@ -33,17 +31,11 @@ class EnemyExplosion {
     }
 
     animate(framesCounter) {
-        if (framesCounter % 20 == 0) {
-            this.imageExplosion.framesIndex++
+        if (framesCounter % 8 == 0) {
+            this.image.framesIndex++
         }
-        if (this.imageExplosion.framseIndex > this.imageExplosion.frames - 1) {
-            this.imageExplosion.framesIndex = 0
+        if (this.image.framseIndex > this.image.frames - 1) {
+            this.image.framesIndex = 0
         }
     }
-
-    move() {
-        this.posY += this.vel
-    }
-
-
 }
